@@ -1,0 +1,33 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "FloatParser",
+      "request": "launch",
+      "mainClass": "Übungsaufgaben.Übungsaufgabe_1.FloatParser",
+      "projectName": "SWE_ce8e7ade"
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "name": "Attach against localhost",
+      "urlFilter": "localhost*",
+      "webRoot": "${workspaceFolder}/dev",
+      "disableNetworkCache": true,
+      "pathMapping": {
+        "resources": "${workspaceFolder}/rsrc/resources"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "launch chrome",
+      "urlFilter": "localhost*",
+      "webRoot": "${workspaceFolder}/dev",
+      "pathMapping": {
+        "resources": "${workspaceFolder}/rsrc/resources"
+      }
+    }
+  ]
+}
