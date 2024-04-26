@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Test",
+      "request": "launch",
+      "mainClass": "Übungsaufgaben.Kartenspiel.Test",
+      "projectName": "SWE_f183aec"
+    },
+    {
+      "type": "java",
       "name": "FloatParser",
       "request": "launch",
       "mainClass": "Übungsaufgaben.Übungsaufgabe_1.FloatParser",
