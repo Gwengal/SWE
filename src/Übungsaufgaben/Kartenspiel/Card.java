@@ -117,8 +117,7 @@ public class Card {
 
         for (int i = 0; i < aColors.length; i++) {
             for (int j = 0; j < aValues.length; j++) {
-                aCards[iCounter] = new Card(aColors[i], aValues[j]);
-                iCounter++;
+                aCards[iCounter++] = new Card(aColors[i], aValues[j]);
             }
         }
 
