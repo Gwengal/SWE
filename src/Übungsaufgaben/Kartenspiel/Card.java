@@ -101,7 +101,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return String.format("Karte: %s %s", this.getColor(), this.getValue());
+        return String.format("---> %s %s", this.getColor(), this.getValue());
     }
 
     /**
