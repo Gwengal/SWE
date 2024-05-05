@@ -62,7 +62,7 @@ public class Stack<t> {
             aElements[iIndex++] = this._aStack[i];
         }
 
-        this._iTop = iIndex + 1;
+        this._iTop = iIndex;
         this._aStack = aElements;
     }
 

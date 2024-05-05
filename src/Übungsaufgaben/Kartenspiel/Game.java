@@ -24,6 +24,9 @@ public class Game {
         oScan.close();
     }
 
+    /**
+     * ToDo
+     */
     public void play() {
         // Spiel vorbereiten (Karten austeilen...)
         this.prepare();
@@ -32,12 +35,32 @@ public class Game {
         int iStart = (int) (Math.random() * 2) + 1;
 
         while (true) {
-            this.playRound(iStart++);
-        }
+            try {
+                System.out.println();
+                iStart = this.playRound(iStart);
+                this._oPlayer1.amountCards();
+                this._oPlayer2.amountCards();
 
+                // 3 Sekunden warten (Sekunden in Millisekunden umrechnen)
+                Thread.sleep(3 * 1000);
+            } catch (Exception e) {
+                // Aktueller Spieler hat keine Karten mehr
+                // --> Anderer Spieler hat das Spiel somit gewonnen
+                Player oPlayer = (iStart % 2 == 0 ? this._oPlayer2 : this._oPlayer1);
+                System.out.printf("%s hat das Spiel gewonnen!\n", oPlayer.equals(this._oPlayer1) ? this._oPlayer2 : this._oPlayer1);
+                break;
+            }
+        }
     }
 
-    private int playRound(int iStart) {
+    /**
+     * ToDo
+     * 
+     * @param iStart
+     * @return
+     * @throws Exception
+     */
+    private int playRound(int iStart) throws Exception {
         int iIndex = iStart;
         Card oPlayed = null;
         Color firstColor = null;
@@ -45,29 +68,33 @@ public class Game {
         Stack<Card> oStack = new Stack<Card>(Card.MAXCARDS);
 
         while (true) {
-            try {
-                // Spieler bestimmen, welcher gerade am Zug ist
-                oPlayer = (iIndex++ % 2 == 0 ? this._oPlayer2 : this._oPlayer1);
-                // Oberste Karte aus dem Stapel ziehen
-                oPlayed = oPlayer.getStack().pop();
-                // Gespielte 
-                oStack.push(oPlayed);
+            // Spieler bestimmen, welcher gerade am Zug ist
+            oPlayer = (iIndex % 2 == 0 ? this._oPlayer2 : this._oPlayer1);
+            // Oberste Karte aus dem Stapel ziehen
+            oPlayed = oPlayer.draw();
+            // Gespielte Karte auf den Stapel legen
+            oStack.push(oPlayed);
 
-
-                // Bei der aller ersten Karte der Runde, die Farbe merken
-                if (iIndex == iStart) {
-                    firstColor = oPlayed.getColor();                  
+            // Bei der aller ersten Karte der Runde, die Farbe merken
+            if (iIndex == iStart) {
+                firstColor = oPlayed.getColor();
                 // Farbe der gespielten Karte stimmt mit der Farbe der ersten Karte überein
-                // --> Runde gewonnen      
-                } else if(firstColor == oPlayed.getColor()){
-
-                }
-
-            } catch (Exception e) {
-                // TODO: handle exception
+                // -> Runde gewonnen
+                // -> Karten, die sich im Stapel "oStack" befinden, werden dem aktuellen Spieler
+                // zugeordnet
+            } else if (firstColor == oPlayed.getColor()) {
+                System.out.printf("%s hat die Runde gewonnen.\n", oPlayer);
+                oStack.mix();
+                oPlayer.getStack().insert(oStack);
+                break;
             }
+
+            // 1 Sekunde warten (Sekunden in Millisekunden umrechnen)
+            Thread.sleep(1 * 1000);
+            iIndex++;
         }
 
+        return iIndex;
     }
 
     /**

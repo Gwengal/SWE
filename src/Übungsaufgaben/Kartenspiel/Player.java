@@ -19,8 +19,38 @@ public class Player {
      * 
      * @return
      */
-    public Stack<Card> getStack(){
+    public Stack<Card> getStack() {
         return this._oStack;
+    }
+
+    /**
+     * Karte aus dem Stapel ziehen und spielen
+     * 
+     * @return
+     * @throws Exception
+     */
+    public Card draw() throws Exception {
+        try {
+            Card oCard = this._oStack.pop();
+            System.out.printf("%s von %s\n", oCard, this);
+
+            return oCard;
+        } catch (Exception e) {
+            throw new Exception(String.format("%s hat keine Karten mehr.", this));
+        }
+    }
+
+    /**
+     * Ausgabe Anzahl Karten des Spielers
+     * 
+     * @throws Exception
+     */
+    public void amountCards() throws Exception {
+        System.out.printf("%s: Karten: %d\n", this, this._oStack.amountElements());
+
+        if (this._oStack.amountElements() == 0) {
+            System.out.printf("\n%s hat keine Karten mehr.");
+        }
     }
 
     @Override
