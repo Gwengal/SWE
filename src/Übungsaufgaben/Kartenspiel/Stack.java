@@ -14,7 +14,7 @@ public class Stack<t> {
      */
     @SuppressWarnings("unchecked")
     public Stack(int iMax) {
-        this._iTop = iMax;
+        this._iTop = 0;
         this._aStack = (t[]) new Object[iMax];
     }
 
@@ -25,8 +25,17 @@ public class Stack<t> {
      * @param Elements
      */
     public Stack(int iMax, t[] aElements) {
-        this._iTop = iMax;
+        this._iTop = aElements.length;
         this._aStack = aElements;
+    }
+
+    /**
+     * Getter für den Stack
+     * 
+     * @return
+     */
+    private t[] getElements(){
+        return this._aStack;
     }
 
     /**
@@ -35,8 +44,9 @@ public class Stack<t> {
      * 
      * @param aElements
      */
-    public void insert(t[] aElements) {
+    public void insert(Stack<t> oStack) {
         int iIndex = 0;
+        t[] aElements = oStack.getElements();
 
         // Bestimmen wie weit der Stapel befüllt wurde
         for (int i = 0; i < aElements.length; i++) {
@@ -108,7 +118,7 @@ public class Stack<t> {
     /**
      * Elemente zufällig durchsortieren (3-Wege Sortierung)
      */
-    public void mix() throws Exception {
+    public void mix() {
         // Zufällige Sortierung überflüssig
         if (this._iTop < 2) {
             return;
@@ -119,7 +129,7 @@ public class Stack<t> {
         int iShuffle1, iShuffle2;
 
         // Zufällige Sortierung durchführen (min 1 und max Anzahl Elemente * 2)
-        for (int i = 0; i < (oRandom.nextInt(this._iTop * 2) + 1); i++) {
+        for (int i = 0; i < (oRandom.nextInt(this._iTop * this._iTop) + 1); i++) {
             // Index für Shuffle1 und Shuffle2 Random bestimmen
             iShuffle1 = oRandom.nextInt(this._iTop);
             iShuffle2 = oRandom.nextInt(this._iTop);

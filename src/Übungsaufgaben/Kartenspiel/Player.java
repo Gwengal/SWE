@@ -4,9 +4,14 @@ public class Player {
     private String _sName;
     private Stack<Card> _oStack;
 
-    public Player(String sName, Stack<Card> oStack) {
+    /**
+     * Konstruktor
+     * 
+     * @param sName
+     */
+    public Player(String sName) {
         this._sName = sName;
-        this._oStack = oStack;
+        this._oStack = new Stack<Card>(Card.MAXCARDS);
     }
 
     /**
@@ -14,17 +19,8 @@ public class Player {
      * 
      * @return
      */
-    public Stack<Card> getStack() {
+    public Stack<Card> getStack(){
         return this._oStack;
-    }
-
-    /**
-     * Getter für Name
-     * 
-     * @return
-     */
-    public String getName() {
-        return this._sName;
     }
 
     @Override
