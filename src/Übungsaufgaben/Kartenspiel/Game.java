@@ -3,7 +3,7 @@ package Übungsaufgaben.Kartenspiel;
 import java.util.Scanner;
 
 public class Game {
-    private Player _oPlayer1, _oPlayer2;
+    protected Player _oPlayer1, _oPlayer2;
 
     public static void main(String[] args) {
         Game oGame = new Game();
@@ -37,31 +37,39 @@ public class Game {
         while (true) {
             try {
                 System.out.println();
-                iStart = this.playRound(iStart);
+                iStart = this.playRound(iStart % 2);
                 this._oPlayer1.amountCards();
                 this._oPlayer2.amountCards();
 
                 // 3 Sekunden warten (Sekunden in Millisekunden umrechnen)
                 Thread.sleep(3 * 1000);
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 // Aktueller Spieler hat keine Karten mehr
                 // --> Anderer Spieler hat das Spiel somit gewonnen
-                Player oPlayer = (iStart % 2 == 0 ? this._oPlayer2 : this._oPlayer1);
-                System.out.printf("%s hat das Spiel gewonnen!\n", oPlayer.equals(this._oPlayer1) ? this._oPlayer2 : this._oPlayer1);
+                try {
+                    LostException eLe = (LostException) e;
+                    System.out.printf("%s hat gewonnen!\n",
+                            eLe.getPlayer().equals(this._oPlayer1) ? this._oPlayer2 : this._oPlayer1);
+                } catch (ClassCastException eCast) {
+                }
                 break;
             }
         }
     }
 
     /**
-     * ToDo
+     * 1. Merken der Farbe von der ersten Karte
+     * 2. Wird solange gespielt bis:
+     * - einer keine Karten mehr hat
+     * - einer eine Karte mit der gleichen Farbe legt
+     * --> Spieler bekommt alle Karte, die gespielt wurden
      * 
      * @param iStart
      * @return
      * @throws Exception
      */
-    private int playRound(int iStart) throws Exception {
-        int iIndex = iStart;
+    protected int playRound(int iIndex) throws Exception {
         Card oPlayed = null;
         Color firstColor = null;
         Player oPlayer = null;
@@ -76,7 +84,7 @@ public class Game {
             oStack.push(oPlayed);
 
             // Bei der aller ersten Karte der Runde, die Farbe merken
-            if (iIndex == iStart) {
+            if (firstColor == null) {
                 firstColor = oPlayed.getColor();
                 // Farbe der gespielten Karte stimmt mit der Farbe der ersten Karte überein
                 // -> Runde gewonnen
@@ -103,7 +111,7 @@ public class Game {
      * - Kartenstapel mischen
      * - Karten austeilen
      */
-    private void prepare() {
+    protected void prepare() {
         // Kartenstapel erzeugen
         Stack<Card> oStack = new Stack<Card>(Card.MAXCARDS, Card.allCards());
 
@@ -124,35 +132,5 @@ public class Game {
                 break;
             }
         }
-    }
-
-    public void startGame() {
-        // String sInput;
-        // Player oPlayer1, oPlayer2;
-        // Random oRandom = new Random();
-        // Scanner oScanner = new Scanner(System.in);
-
-        // while (true) {
-        // // Spielernamen erfassen und die dazugehörigen Objekte initiieren
-        // oPlayer1 = this.recordPlayer(1, oScanner);
-        // oPlayer2 = this.recordPlayer(2, oScanner);
-
-        // System.out.println("Spiel beginnt. Viel Spaß!\n\n\n");
-
-        // // Spiel ausführen
-        // this.execute(oPlayer1, oPlayer2, oRandom);
-
-        // System.out.print("Noch eine Runde [y/Y]?");
-        // sInput = oScanner.nextLine();
-
-        // // Noch eine Runde ausführen
-        // if (sInput.contains("y") || sInput.contains("Y")) {
-        // System.out.println("\n\n\n\n");
-        // continue;
-        // }
-
-        // // Schleife verlassen
-        // break;
-        // }
     }
 }

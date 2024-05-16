@@ -16,7 +16,7 @@ enum Value {
     seven,
     eight,
     nine,
-    teen,
+    ten,
     Jack,
     Queen,
     King,
@@ -50,7 +50,7 @@ enum Value {
             case nine:
                 sReturnValue = "9";
                 break;
-            case teen:
+            case ten:
                 sReturnValue = "10";
                 break;
             default:
@@ -122,6 +122,16 @@ public class Card {
         }
 
         return aCards;
+    }
+
+    /**
+     * Vergleicht die Kartenwerte
+     * 
+     * @param oCard
+     * @return
+     */
+    public int compare(Card oCard) {
+        return this._eValue.ordinal() - oCard._eValue.ordinal();
     }
 
 }

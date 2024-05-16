@@ -29,14 +29,14 @@ public class Player {
      * @return
      * @throws Exception
      */
-    public Card draw() throws Exception {
+    public Card draw() throws LostException {
         try {
             Card oCard = this._oStack.pop();
             System.out.printf("%s von %s\n", oCard, this);
 
             return oCard;
         } catch (Exception e) {
-            throw new Exception(String.format("%s hat keine Karten mehr.", this));
+            throw new LostException(String.format("\n%s hat keine Karten mehr.", this), this);
         }
     }
 
@@ -45,11 +45,11 @@ public class Player {
      * 
      * @throws Exception
      */
-    public void amountCards() throws Exception {
+    public void amountCards() throws LostException {
         System.out.printf("%s: Karten: %d\n", this, this._oStack.amountElements());
 
         if (this._oStack.amountElements() == 0) {
-            System.out.printf("\n%s hat keine Karten mehr.");
+            throw new LostException(String.format("\n%s hat keine Karten mehr!", this), this);
         }
     }
 
