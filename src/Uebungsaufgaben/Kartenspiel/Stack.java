@@ -1,4 +1,4 @@
-package Übungsaufgaben.Kartenspiel;
+package Uebungsaufgaben.Kartenspiel;
 
 import java.util.Random;
 

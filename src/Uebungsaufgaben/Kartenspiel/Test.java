@@ -1,4 +1,4 @@
-package Übungsaufgaben.Kartenspiel;
+package Uebungsaufgaben.Kartenspiel;
 
 public class Test {
     public static void main(String[] args) {

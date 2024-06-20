@@ -1,4 +1,4 @@
-package Übungsaufgaben.Warenkorb;
+package Uebungsaufgaben.Warenkorb;
 
 public class Warenkorb<T extends Comparable<T>> {
     private Node _oHead;

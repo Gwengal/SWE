@@ -1,4 +1,4 @@
-package Übungsaufgaben.Kartenspiel;
+package Uebungsaufgaben.Kartenspiel;
 
 public class Game2 extends Game {
 

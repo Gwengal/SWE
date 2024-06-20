@@ -1,4 +1,4 @@
-package Übungsaufgaben.Übungsaufgabe_1;
+package Uebungsaufgaben.Übungsaufgabe_1;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package Übungsaufgaben.Warenkorb;
+package Uebungsaufgaben.Warenkorb;
 
 // import java.util.Date;
 
